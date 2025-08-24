@@ -17,6 +17,8 @@ extern "C" void hkMain() {
 
     auto* socket = hk::socket::Socket::initialize(cConfig, buffer);
 
+    HK_ABORT("balls: %d", *(new int(4)));
+
     auto [err, errno] = socket->socket(hk::socket::AddressFamily::Ipv4, hk::socket::Type::Stream, hk::socket::Protocol(0));
 
     s32 fd = err;
