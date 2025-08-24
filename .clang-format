@@ -3,7 +3,7 @@ QualifierAlignment: Left
 NamespaceIndentation: All
 BreakBeforeBraces: Custom
 BraceWrapping:
-  AfterEnum: true
+  AfterEnum: false
   AfterFunction: false
   AfterClass: false
   SplitEmptyFunction: false
