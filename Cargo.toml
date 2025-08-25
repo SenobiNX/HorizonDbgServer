@@ -1,0 +1,13 @@
+[package]
+name = "horizon-dbg-interop"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+horizon-dbg-protocol = { git = "https://github.com/Sanae6/horizon-dbg", version = "0.1.0" }
+maitake-sync = "0.2.2"
+postcard-rpc = "0.11.13"
+serde = { version = "1.0.219", default-features = false, features = ["derive"] }

@@ -3,12 +3,12 @@
 
 namespace hdbg {
 
-    hk::ValueOrResult<DebugSession> DebugSession::makeSession(u64 processId) {
-        hk::svc::Handle debugHandle;
-        HK_TRY(debugHandle = hk::svc::DebugActiveProcess(processId));
+    // hk::ValueOrResult<DebugSession> DebugSession::makeSession(u64 processId) {
+    //     hk::svc::Handle debugHandle;
+    //     HK_TRY(debugHandle = hk::svc::DebugActiveProcess(processId));
 
-        return move(DebugSession(debugHandle));
-    }
+    //     return move(DebugSession(debugHandle));
+    // }
 
     DebugSession::DebugSession(hk::svc::Handle debugHandle)
         : mDebugHandle(debugHandle) { }

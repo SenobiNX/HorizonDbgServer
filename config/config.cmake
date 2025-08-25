@@ -1,4 +1,4 @@
-set(LINKFLAGS -nodefaultlibs)
+set(LINKFLAGS -nodefaultlibs -L ${PROJECT_SOURCE_DIR}/target/aarch64-nintendo-switch-freestanding/debug -lhorizon_dbg_interop)
 set(LLDFLAGS --no-demangle --gc-sections)
 
 set(OPTIMIZE_OPTIONS_DEBUG -O2 -gdwarf-4)
@@ -8,7 +8,7 @@ set(WARN_OPTIONS -Werror=return-type -Wno-invalid-offsetof)
 set(INCLUDES include include/agl)
 
 set(ASM_OPTIONS "")
-set(C_OPTIONS -ffunction-sections -fdata-sections)
+set(C_OPTIONS -fno-stack-protector -ffunction-sections -fdata-sections)
 set(CXX_OPTIONS "")
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
