@@ -50,11 +50,11 @@ enum State {
   Taken = 1,
 }
 
-struct SwitchMutex {
+struct SwitchFutex {
   value: AtomicU32,
 }
 
-impl SwitchMutex {
+impl SwitchFutex {
   pub fn new() -> Self {
     Self {
       value: AtomicU32::new(State::Idle as u32),
@@ -62,7 +62,7 @@ impl SwitchMutex {
   }
 }
 
-unsafe impl ScopedRawMutex for SwitchMutex {
+unsafe impl ScopedRawMutex for SwitchFutex {
   fn try_with_lock<R>(&self, f: impl FnOnce() -> R) -> Option<R> {
     if self
       .value
@@ -127,14 +127,6 @@ unsafe impl ScopedRawMutex for SwitchMutex {
   }
 
   fn is_locked(&self) -> bool {
-    todo!()
+    self.value.load(Ordering::Relaxed) != State::Idle as u32
   }
-}
-
-struct Guard<'a> {
-  mutex: &'a SwitchMutex,
-}
-
-impl<'a> Drop for Guard<'a> {
-  fn drop(&mut self) {}
 }

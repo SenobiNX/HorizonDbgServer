@@ -141,7 +141,7 @@ dependencies = [
 [[package]]
 name = "horizon-dbg-protocol"
 version = "0.1.0"
-source = "git+https://github.com/Sanae6/horizon-dbg#d43a9eca2cd5bda4c3dc9698a0036d2445127edb"
+source = "git+https://github.com/Sanae6/horizon-dbg#665c8549bf1d2f3010abde281be3f3bd3ed456e5"
 dependencies = [
  "postcard-rpc",
  "postcard-schema",

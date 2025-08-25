@@ -1,6 +1,8 @@
 #![no_std]
 #![feature(sync_unsafe_cell)]
 
+extern crate alloc;
+
 use core::alloc::GlobalAlloc;
 
 #[global_allocator]
