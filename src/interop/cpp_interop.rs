@@ -1,4 +1,4 @@
-mod mutex;
+pub mod mutex;
 
 use core::fmt;
 

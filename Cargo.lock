@@ -136,16 +136,20 @@ dependencies = [
  "maitake-sync",
  "postcard-rpc",
  "serde",
+ "vtable-rs",
+ "zerocopy",
 ]
 
 [[package]]
 name = "horizon-dbg-protocol"
 version = "0.1.0"
-source = "git+https://github.com/Sanae6/horizon-dbg#665c8549bf1d2f3010abde281be3f3bd3ed456e5"
+source = "git+https://github.com/Sanae6/horizon-dbg#1cbce86cca3f310cb7ff87877186e1bf92fe9b4f"
 dependencies = [
+ "postcard",
  "postcard-rpc",
  "postcard-schema",
  "serde",
+ "zerocopy",
 ]
 
 [[package]]
@@ -596,6 +600,26 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ba73ea9cf16a25df0c8caa16c51acb937d5712a8429db78a3ee29d5dcacd3a65"
 
 [[package]]
+name = "vtable-rs"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "724216e2508f74f765851c89ac5a74e0b53373734635a0925d84968ab2e8214c"
+dependencies = [
+ "vtable-rs-proc-macros",
+]
+
+[[package]]
+name = "vtable-rs-proc-macros"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bb88a9024d3ac3ae6fbd44635cfe9a085437ee749fbba4d2b7bf4510cbb118b5"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "winapi"
 version = "0.3.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -726,4 +750,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b66463ad2e0ea3bbf808b7f1d371311c80e115c0b71d60efc142cafbcfb057a6"
 dependencies = [
  "windows-link",
+]
+
+[[package]]
+name = "zerocopy"
+version = "0.8.26"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1039dd0d3c310cf05de012d8a39ff557cb0d23087fd44cad61df08fc31907a2f"
+dependencies = [
+ "zerocopy-derive",
+]
+
+[[package]]
+name = "zerocopy-derive"
+version = "0.8.26"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9ecf5b4cc5364572d7f4c329661bcc82724222973f2cab6f050a4e5c22f75181"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]

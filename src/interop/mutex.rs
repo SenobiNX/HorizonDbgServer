@@ -6,6 +6,7 @@ use crate::cpp_interop::mutex::svc::{
   ArbitrationType, SignalType, signal_to_address, wait_for_address,
 };
 
+#[allow(unused)]
 mod svc {
   use core::arch::naked_asm;
 
@@ -50,12 +51,12 @@ enum State {
   Taken = 1,
 }
 
-struct SwitchFutex {
+pub struct SwitchFutex {
   value: AtomicU32,
 }
 
 impl SwitchFutex {
-  pub fn new() -> Self {
+  pub const fn new() -> Self {
     Self {
       value: AtomicU32::new(State::Idle as u32),
     }
