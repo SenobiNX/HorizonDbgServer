@@ -16,6 +16,13 @@ include_directories(include/al)
 include_directories(include/game)
 include_directories(lib/imgui)
 
+set(RUST_STATIC_LIB_LOCATION ${PROJECT_SOURCE_DIR}/target/aarch64-nintendo-switch-freestanding/debug/libhorizon_dbg_interop.a)
+add_custom_target(Cargo COMMAND cargo build)
+add_library(RustLib STATIC IMPORTED)
+set_target_properties(RustLib PROPERTIES IMPORTED_LOCATION ${RUST_STATIC_LIB_LOCATION})
+add_dependencies(${PROJECT_NAME} Cargo)
+target_link_libraries(${PROJECT_NAME} LINK_PUBLIC RustLib)
+
 include(sys/cmake/module.cmake)
 include(sys/cmake/deploy.cmake)
 include(sys/cmake/sail.cmake)

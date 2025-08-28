@@ -1,4 +1,4 @@
-set(LINKFLAGS -nodefaultlibs -L ${PROJECT_SOURCE_DIR}/target/aarch64-nintendo-switch-freestanding/debug -lhorizon_dbg_interop)
+set(LINKFLAGS -nodefaultlibs)
 set(LLDFLAGS --no-demangle --gc-sections)
 
 set(OPTIMIZE_OPTIONS_DEBUG -O2 -gdwarf-4)
