@@ -2,6 +2,7 @@
 
 #include "hk/ValueOrResult.h"
 #include "hk/svc/types.h"
+#include "hk/types.h"
 
 namespace hdbg {
 
@@ -10,6 +11,13 @@ namespace hdbg {
 
         DebugSession(hk::svc::Handle debugHandle);
         ~DebugSession();
+
+        NON_COPYABLE(DebugSession);
+
+        DebugSession(DebugSession&& other)
+            : mDebugHandle(other.mDebugHandle) {
+            other.mDebugHandle = 0;
+        }
 
     public:
         static hk::ValueOrResult<DebugSession> makeSession(u64 processId);
