@@ -2,7 +2,6 @@
 #include "hk/types.h"
 
 extern "C" void rust_log(const char* text, size len) {
-  // todo: fix
   hk::diag::hkLogSink(text, len);
 }
 

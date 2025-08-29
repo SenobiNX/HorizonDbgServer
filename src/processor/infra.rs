@@ -8,7 +8,6 @@ use core::{
 };
 
 use alloc::boxed::Box;
-use macros::cxx_export;
 use maitake_sync::blocking::Mutex;
 
 use crate::cpp_interop::mutex::SwitchFutex;
@@ -25,7 +24,7 @@ struct State<'a> {
 }
 
 impl ProtocolProcessor {
-  #[cxx_export("hdbg::processor::initialize()")]
+  #[unsafe(export_name = "_ZN4hdbg9processor10initializeEv")]
   pub extern "C" fn initialize() {
     let _old = INSTANCE.with_lock(|value| {
       value.replace(ProtocolProcessor {
@@ -34,8 +33,7 @@ impl ProtocolProcessor {
     });
   }
 
-  // yes that is how you have to put consts with mangler
-  #[cxx_export("hdbg::processor::processData(char* const, size_t)")]
+  #[unsafe(export_name = "_ZN4hdbg9processor11processDataEPKhm")]
   pub extern "C" fn process_data(data: *mut u8, size: usize) {
     INSTANCE.with_lock(|value| {
       let value = value
@@ -45,7 +43,9 @@ impl ProtocolProcessor {
       let state = UnsafeCell::new(State {
         current_buffer: unsafe { slice::from_raw_parts_mut(data, size) },
       });
+
       let waker = unsafe { Waker::new(state.get().cast_const().cast(), &PROCESSING_WAKER) };
+      
       if let Poll::Ready(()) = value
         .processor_future
         .as_mut()

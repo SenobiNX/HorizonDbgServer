@@ -26,7 +26,7 @@ macro_rules! println {
     use ::core::fmt::Write;
     // this will never return an error
     unsafe {
-      ::core::writeln!(&mut $crate::cpp_interop::Formatter, $($tree)*).unwrap_unchecked()
+      ::core::write!(&mut $crate::cpp_interop::Formatter, $($tree)*).unwrap_unchecked()
     };
   }};
 }
