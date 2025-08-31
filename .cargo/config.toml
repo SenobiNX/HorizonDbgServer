@@ -1,6 +1,0 @@
-[build]
-target = "aarch64-nintendo-switch-freestanding"
-
-[unstable]
-build-std = ["core", "alloc", "compiler_builtins"]
-build-std-features = ["compiler-builtins-mem"]
