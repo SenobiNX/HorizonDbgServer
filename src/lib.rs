@@ -22,6 +22,7 @@ unsafe impl GlobalAlloc for HkAlloc {
 mod cpp_interop;
 mod panic_handler;
 mod processor;
+pub mod send;
 
 #[unsafe(export_name = "test")]
 pub extern "C" fn test(a: u32, b: u32) -> u32 {

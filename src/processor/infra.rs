@@ -12,6 +12,18 @@ use maitake_sync::blocking::Mutex;
 
 use crate::cpp_interop::mutex::SwitchFutex;
 
+#[cxx::bridge(namespace = "hdbg::processor")]
+mod _ffi {
+  extern "Rust" {
+    type ProtocolProcessor;
+
+    #[Self = "ProtocolProcessor"]
+    fn initialize();
+    #[Self = "ProtocolProcessor"]
+    unsafe fn process_data(data: *const u8, size: usize);
+  }
+}
+
 static INSTANCE: Mutex<Option<ProtocolProcessor>, SwitchFutex> =
   Mutex::new_with_raw_mutex(None, SwitchFutex::new());
 
@@ -24,8 +36,8 @@ struct State<'a> {
 }
 
 impl ProtocolProcessor {
-  #[unsafe(export_name = "_ZN4hdbg9processor10initializeEv")]
-  pub extern "C" fn initialize() {
+  // #[unsafe(export_name = "_ZN4hdbg9processor10initializeEv")]
+  pub fn initialize() {
     let _old = INSTANCE.with_lock(|value| {
       value.replace(ProtocolProcessor {
         processor_future: Box::pin(super::process()),
@@ -33,15 +45,15 @@ impl ProtocolProcessor {
     });
   }
 
-  #[unsafe(export_name = "_ZN4hdbg9processor11processDataEPKhm")]
-  pub extern "C" fn process_data(data: *mut u8, size: usize) {
+  // #[unsafe(export_name = "_ZN4hdbg9processor11processDataEPKhm")]
+  pub fn process_data(data: *const u8, size: usize) {
     INSTANCE.with_lock(|value| {
       let value = value
         .as_mut()
         .expect("tried to process data while processor is not initialized");
 
       let state = UnsafeCell::new(State {
-        current_buffer: unsafe { slice::from_raw_parts_mut(data, size) },
+        current_buffer: unsafe { slice::from_raw_parts(data, size) },
       });
 
       let waker = unsafe { Waker::new(state.get().cast_const().cast(), &PROCESSING_WAKER) };

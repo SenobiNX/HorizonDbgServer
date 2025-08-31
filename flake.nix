@@ -27,15 +27,15 @@
       in
         with pkgs; rec {
           formatter = pkgs.alejandra;
-          devShells.default = mkShell.override {stdenv = llvmPackages.libcxxStdenv;} {
+          devShells.default = mkShell.override {stdenv = stdenvNoCC;} {
             buildInputs =
               build.dependencies
               ++ [
                 inetutils
                 pkgs.fenix.complete.toolchain
-                hactool
               ];
-            SWITCHTOOLS = "${build.localPackages.switch-tools}/bin";
+            CC = "clang";
+            CXX = "clang++";
           };
         }
     );

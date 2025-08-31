@@ -34,10 +34,6 @@ void hk::diag::hkLogSink(const char* msg, size len) {
 extern "C" void hkMain() {
     hk::sm::ServiceManager::initialize()->registerClient();
 
-    hk::diag::debugLog("hello worldly");
-
-    HK_ABORT("my time has come", 0);
-
     auto* socket = hk::socket::Socket::initialize(cConfig, buffer);
 
     hdbg::DebugSession session = HK_UNWRAP(hdbg::DebugSession::make(84));
@@ -49,6 +45,4 @@ extern "C" void hkMain() {
         hk::diag::logLine("%p %p %d %d", memoryInfo.base_address, memoryInfo.size, memoryInfo.permission, memoryInfo.state);
         addr = memoryInfo.base_address + memoryInfo.size;
     }
-
-    hk::diag::logLine("awesome sauce %d", test(4, 2));
 }

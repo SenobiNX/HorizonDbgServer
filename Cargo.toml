@@ -11,7 +11,7 @@ edition = "2024"
 crate-type = ["staticlib"]
 
 [dependencies]
-cxx_linker = "0.1.0"
+cxx = { version = "1.0.173", default-features = false, features = ["alloc"] }
 horizon-dbg-protocol = { git = "https://github.com/Sanae6/horizon-dbg", version = "0.1.0" }
 macros = { version = "0.1.0", path = "macros" }
 maitake-sync = "0.2.2"
@@ -19,3 +19,6 @@ postcard-rpc = "0.11.13"
 serde = { version = "1.0.219", default-features = false, features = ["derive"] }
 vtable-rs = "0.1.4"
 zerocopy = { version = "0.8.26", features = ["derive"] }
+
+[build-dependencies]
+cxx-build = "1.0.173"
